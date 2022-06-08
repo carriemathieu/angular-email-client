@@ -1,1 +1,29 @@
-<p>signup works!</p>
+<h3>Create an account</h3>
+<form (ngSubmit)="onSubmit()" class="ui form" [formGroup]="authForm">
+
+    <app-input inputType="text" label="Username" [control]="$any(authForm.get('username'))"></app-input>
+
+    <app-input inputType="password" label="Password" [control]="$any(authForm.get('password'))"></app-input>
+
+    <app-input inputType="password" label="Password Confirmation" [control]="$any(authForm.get('passwordConfirmation'))"></app-input>
+
+    <div 
+        *ngIf="
+            authForm.get('password').touched && authForm.get('passwordConfirmation') && authForm.errors" 
+        class="ui red basic label"
+    >
+        <p *ngIf="authForm.errors.passwordsDontMatch">
+            Passwords must match.
+        </p>
+        <p *ngIf="authForm.errors.noConnection">
+            Unable to establish network connection. Signup failed.
+        </p>
+        <p *ngIf="authForm.errors.unknownError">
+            Signup failed. Please try again.
+        </p>
+    </div>
+    
+    <div>
+        <button class="ui submit button primary">Submit</button>
+    </div>
+</form>
