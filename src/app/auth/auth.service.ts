@@ -64,7 +64,7 @@ export class AuthService {
   }
 
   signout() {
-    this.http.post(`${this.rootUrl}/auth/signout`, {})
+    return this.http.post(`${this.rootUrl}/auth/signout`, {})
     .pipe(
       tap(() => {
         this.signedin$.next(false); // tells rest of application we are no longer signed in
